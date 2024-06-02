@@ -1,18 +1,15 @@
+import {
+  CategoryScale, Chart as ChartJS, Legend, LinearScale, LineElement, PointElement, TimeScale, Title,
+  Tooltip
+} from 'chart.js';
+import 'chartjs-adapter-date-fns';
+import annotationPlugin from 'chartjs-plugin-annotation';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  TimeScale
-} from 'chart.js';
-import annotationPlugin from 'chartjs-plugin-annotation';
-import 'chartjs-adapter-date-fns';
+
+// // Import hình ảnh
+// import appleIcon from '../../public/apple.png';
+// import dishIcon from '../../public/dia.jpg';
 
 ChartJS.register(
   CategoryScale,
@@ -73,28 +70,26 @@ const Chart = () => {
       annotation: {
         annotations: {
           sub_meals: data.sub_meals.map((time, index) => ({
-            type: 'point',
+            type: 'label',
             xValue: time,
             yValue: hba1cValues[0], // Sử dụng giá trị y đầu tiên để đặt vị trí icon
+            content: () => `<img src="../../public/apple.png" width="100" height="100"/>`,
+            position: 'center',
+            xAdjust: 0,
+            yAdjust: -10,
             backgroundColor: 'transparent',
             borderColor: 'transparent',
-            content: {
-              src: 'https://example.com/apple_icon.png', // Thay thế bằng URL thực tế của icon quả táo
-              width: 20,
-              height: 20
-            }
           })),
           primary_meals: data.primary_meals.map((time, index) => ({
-            type: 'point',
+            type: 'label',
             xValue: time,
-            yValue: hba1cValues[0], // Sử dụng giá trị y đầu tiên để đặt vị trí icon
+            yValue: hba1cValues[0], 
+            content: () => `<img src="../../public/dia.png" width="100" height="100"/>`,
+            position: 'center',
+            xAdjust: 0,
+            yAdjust: -10,
             backgroundColor: 'transparent',
             borderColor: 'transparent',
-            content: {
-              src: 'https://example.com/plate_icon.png', // Thay thế bằng URL thực tế của icon cái đĩa
-              width: 20,
-              height: 20
-            }
           }))
         }
       }
